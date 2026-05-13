@@ -1,11 +1,18 @@
-const MOCK_TASKS = [
-    { id: 1, title: 'Изучить паттерн MVC', isDone: false },
-    { id: 2, title: 'Подготовить моковые данные', isDone: true },
-]
 
-// хранение данных, бизнес-логика
-const model = {
-    tasks: MOCK_TASKS
+model = {
+    tasks: [], // заменяем MOCK_TASKS на пустой массив
+
+    addTask(title) {
+        const isDone = false
+        const id = Math.random()
+
+        const newTask = { title, isDone, id }
+        // то же, что { title: title, isDone: isDone, id: id }
+
+        this.tasks.push(newTask)
+
+        view.renderTasks(model.tasks) // Обновляем представление
+    },
 }
 
 // отображение данных: рендер списка задач, размещение обработчиков событий
