@@ -19,6 +19,18 @@ model = {
 const view = {
     init() {
         this.renderTasks(model.tasks)
+
+        const form = document.querySelector('.form')
+        const input = document.querySelector('.input')
+
+        // Добавляем обработчик события на форму
+        form.addEventListener('submit', function (event) {
+            event.preventDefault() // Предотвращаем стандартное поведение формы
+            const title = document.querySelector('.input').value
+            controller.addTask(title) // Вызываем метод addTask контроллера
+
+            input.value = '' // Очищаем поле ввода
+        })
     },
 
     renderTasks(tasks) {
@@ -51,4 +63,11 @@ const view = {
 init()
 
 // обработка действий пользователя, обновление модели
-const controller = {}
+const controller = {
+    addTask(title) {
+        // Проверяем, что строка не пустая
+        if (title.trim() !== '') {
+            model.addTask(title)
+        }
+    },
+}
